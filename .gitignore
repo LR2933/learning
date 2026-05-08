@@ -1,0 +1,12 @@
+**/__pycache__/*
+**/.ok_consent
+**/.ok_context
+**/.ok_disabled
+**/.ok_history
+**/.ok_messages
+**/.ok_storage
+**/construct_check.py
+**/hw06.ok
+**/ok
+**/tests/__init__.py
+
