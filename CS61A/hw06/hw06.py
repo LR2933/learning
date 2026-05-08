@@ -95,6 +95,10 @@ class VendingMachine:
     def __init__(self, product: str, price: int):
         """Set the product and its price, as well as other instance attributes."""
         "*** YOUR CODE HERE ***"
+        self.product = product
+        self.price = price
+        self.stock = 0
+        self.funds = 0
 
     def restock(self, n: int) -> str:
         """Add n to the stock and return a message about the updated stock level.
@@ -102,6 +106,8 @@ class VendingMachine:
         E.g., Current candy stock: 3
         """
         "*** YOUR CODE HERE ***"
+        self.stock += n
+        return (f'Current {self.product} stock: {self.stock}')
 
     def add_funds(self, n: int) -> str:
         """If the machine is out of stock, return a message informing the user to restock
@@ -114,6 +120,12 @@ class VendingMachine:
         E.g., Current balance: $4
         """
         "*** YOUR CODE HERE ***"
+        self.funds += n
+        if self.stock == 0:
+            self.funds -= n
+            return (f"Nothing left to vend. Please restock. Here is your ${n}.")
+        elif self.stock > 0:
+            return (f"Current balance: ${self.funds}")
 
     def vend(self) -> str:
         """Dispense the product if there is sufficient stock and funds and
@@ -127,6 +139,20 @@ class VendingMachine:
               Please add $3 more funds.
         """
         "*** YOUR CODE HERE ***"
+        if self.stock > 0:
+            if self.funds >= self.price:
+                self.stock -= 1
+                change = self.funds - self.price
+                self.funds = 0
+                if change != 0:
+                    return (f"Here is your {self.product} and ${change} change.")
+                else:
+                    return (f"Here is your {self.product}.")
+
+            else:
+                return (f"Please add ${self.price - self.funds} more funds.")
+        else:
+            return (f"Nothing left to vend. Please restock.")
 
 def store_digits(n: int):
     """Stores the digits of a positive number n in a linked list.
